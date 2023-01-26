@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import './Mainpage.dart';
+import './Langselectionpage.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -33,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(
                 builder: (context) => MaterialApp(
-                      home: Mainpage(),
+                      home: Langselectionpage(),
                     ))));
   }
 

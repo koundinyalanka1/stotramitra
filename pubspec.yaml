@@ -64,6 +64,24 @@ flutter:
     - assets/images/play_store_512.png
     - assets/images/ic_action_om.png
     - assets/images/ic_action_peacock.png
+    - assets/images/adishankaracharya.jpg
+    - assets/images/dattatreya.jpg
+    - assets/images/gayatri_devi.jpg
+    - assets/images/karthikeya.jpg
+    - assets/images/lakshmi_devi.jpg
+    - assets/images/lalita_devi.jpg
+    - assets/images/navagrahas.jpg
+    - assets/images/sai_baba.jpg
+    - assets/images/saraswati_devi.jpg
+    - assets/images/shiva.jpg
+    - assets/images/surya_deva.jpg
+    - assets/images/vishnu.jpg
+    - assets/images/hanuman.jpg
+    - assets/images/ganesha.jpg
+    - assets/images/hindi.png
+    - assets/images/english.png
+    - assets/images/bengali.png
+    - assets/images/gujarati.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

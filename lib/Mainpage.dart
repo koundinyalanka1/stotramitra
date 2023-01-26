@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
+import './Stotras.dart';
 
 class Mainpage extends StatelessWidget {
   const Mainpage({super.key});
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'Stotra Mitra';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,8 @@ class Mainpage extends StatelessWidget {
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
 
+
+
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
@@ -27,10 +31,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    Stotras(),
     Text(
       'Index 1: Business',
       style: optionStyle,
