@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "./Mainpage.dart";
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Langselectionpage extends StatelessWidget {
   const Langselectionpage({Key? key}) : super(key: key);
@@ -25,10 +27,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String lang_code='';
   List menuList = [
-    _MenuItem('assets/images/bengali.png', 'Bengali'),
-    _MenuItem('assets/images/hindi.png', 'Hindi'),
-    _MenuItem('assets/images/english.png', 'English'),
+    _MenuItem('assets/images/bengali.png', 'Bengali','bn'),
+    _MenuItem('assets/images/hindi.png', 'Hindi','hi'),
+    _MenuItem('assets/images/english.png', 'English','en'),
+    _MenuItem('assets/images/gujarati.png', 'Gujarati','gu'),
+    _MenuItem('assets/images/kannada.png', 'Kannada','kn'),
+    _MenuItem('assets/images/malayalam.png', 'Malayalam','ml'),
+    _MenuItem('assets/images/odia.png', 'Odia','or'),
+    _MenuItem('assets/images/tamil.png', 'Tamil','ta'),
+    _MenuItem('assets/images/telugu.png', 'Telugu','te'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -40,18 +49,19 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(10.0),
         child: GridView.builder(
           gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (context, position) {
             return Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                     onTap: () {
-                     /* Navigator.pushReplacement(
+                      lang_code=menuList[position].code;
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => MaterialApp(
                                 home: Mainpage(),
-                              ),),);*/
+                              ),),);
                     },
                     child: Center(
                       child: Column(
@@ -59,26 +69,27 @@ class _MyHomePageState extends State<MyHomePage> {
                           Center(
                             child: Card(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100.0)),
+                                  borderRadius: BorderRadius.circular(50.0)),
                               elevation: 5,
                               child: Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(5.0),
                                 child: Image.asset(
                                   menuList[position].icon,
-                                  height: 70,
-                                  width: 70,
+                                  height: 135,
+                                  width: 135,
+
                                 ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(3.0),
                             child: Container(
                               alignment: Alignment.bottomCenter,
                               child: Text(
                                 menuList[position].title,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
 
                               ),
                             ),
@@ -97,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class _MenuItem {
   final String icon;
   final String title;
-
-  _MenuItem(this.icon, this.title);
+  final String code;
+  _MenuItem(this.icon, this.title,this.code);
 }
 
