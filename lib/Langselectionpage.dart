@@ -75,21 +75,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Image.asset(
                                   menuList[position].icon,
-                                  height: 135,
-                                  width: 135,
+                                  height: 120,
+                                  width: 120,
 
                                 ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(3.0),
+                            padding: const EdgeInsets.all(2.0),
                             child: Container(
                               alignment: Alignment.bottomCenter,
                               child: Text(
                                 menuList[position].title,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),
 
                               ),
                             ),
