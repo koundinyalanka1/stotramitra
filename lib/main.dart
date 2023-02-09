@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import './Mainpage.dart';
-import './Langselectionpage.dart';
+import 'Langdialog.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -25,17 +28,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late String lang;
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MaterialApp(
-                      home: Langselectionpage(),
-                    ))));
+    debugPrint(
+        '--------------------------------------initState---------------------------------');
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _showSimpleDialog();
+    });
+
   }
 
   @override
@@ -60,5 +62,80 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> _showSimpleDialog() async {
+    await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            // <-- SEE HERE
+            //titlePadding: EdgeInsets.all(5.0),
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Select Language',style: TextStyle(fontSize: 25),textAlign: TextAlign.center,),
+              children: <Widget>[
+                Container(
+                  child: Column(
+                    children: [
+                      Langdialog(),
+                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        //width: double.maxFinite,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+
+                            getLanguage().then((String value) {
+                              lang = value;
+                              setAppLocale(value);
+                            }
+                            );
+
+
+                          },
+                          child: Text('OK',style: TextStyle(fontSize: 17)),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+              ]);
+        });
+  }
+
+  String setAppLocale(String value) {
+    Fluttertoast.showToast(
+        msg: value+" Selected. This can be changed in settings",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    Timer(
+      Duration(seconds: 1),
+          () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MaterialApp(
+            home: Mainpage(),
+          ),
+        ),
+      ),
+    );
+    return value;
+  }
+
+  Future<String> getLanguage() async {
+    var prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('language')) {
+      String? info = await prefs.getString('language');
+      print(info!+' in main');
+      return info;
+    }
+    return 'en';
   }
 }

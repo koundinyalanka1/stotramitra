@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Stotras.dart';
 
 class Mainpage extends StatelessWidget {
   const Mainpage({super.key});
 
   static const String _title = 'Stotra Mitra';
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +19,24 @@ class Mainpage extends StatelessWidget {
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
 
-
-
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _groupValue = -1;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(getLanguage().toString());
+    //_showAlertDialog();
+  }
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Stotras(),
     Text(
@@ -51,6 +58,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       _selectedIndex = index;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,4 +98,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
+
+  Future<String> getLanguage() async {
+    var prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('language')) {
+      String? info = await prefs.getString('language');
+      print(info!+' in main page');
+      return info;
+    }
+    return 'en';
+  }
+
+
 }
