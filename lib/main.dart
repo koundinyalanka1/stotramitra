@@ -3,7 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import './Mainpage.dart';
-import 'Langdialog.dart';
+import './Langdialog.dart';
+import './Constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -92,7 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             }
                             );
 
-
                           },
                           child: Text('OK',style: TextStyle(fontSize: 17)),
                         ),
@@ -107,8 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String setAppLocale(String value) {
+
     Fluttertoast.showToast(
-        msg: value+" Selected. This can be changed in settings",
+        msg: Constants.language_map[value]!+" Selected. This can be changed in settings",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

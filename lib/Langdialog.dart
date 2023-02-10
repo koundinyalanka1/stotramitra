@@ -194,6 +194,9 @@ class _MyStatefulWidgetState extends State<Langdialog> {
       ],
     );
   }
+
+
+
   Future<String> setLanguage(String language) async {
     var prefs = await SharedPreferences.getInstance();
     print(language+' language');
